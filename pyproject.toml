@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=68.0", "setuptools-scm>=8.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kube-doctor"
+version = "0.1.0"
+description = "A CLI tool for Kubernetes cluster health diagnostics"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [{name = "Mohammed Waseem Khan", email = "iamwaseem18@gmail.com"}]
+keywords = ["kubernetes", "k8s", "diagnostics", "health-check", "cli", "devops", "sre"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Systems Administration",
+]
+dependencies = [
+    "click>=8.1",
+    "kubernetes>=28.1",
+    "rich>=13.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+]
+
+[project.scripts]
+kube-doctor = "kube_doctor.cli:cli"
+
+[project.urls]
+Homepage = "https://github.com/iamwaseem18/kube-doctor"
+Repository = "https://github.com/iamwaseem18/kube-doctor"
+Issues = "https://github.com/iamwaseem18/kube-doctor/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
