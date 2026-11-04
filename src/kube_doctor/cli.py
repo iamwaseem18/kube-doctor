@@ -7,10 +7,10 @@ from rich.console import Console
 from rich.panel import Panel
 
 from kube_doctor import __version__
+from kube_doctor.checks.networking import check_network
 from kube_doctor.checks.pod_health import check_pods
 from kube_doctor.checks.resource_pressure import check_nodes
 from kube_doctor.checks.security_audit import check_security
-from kube_doctor.checks.networking import check_network
 
 console = Console()
 
@@ -41,7 +41,6 @@ def cli():
     crashed pods, resource pressure, security issues, and networking
     problems.
     """
-    pass
 
 
 @cli.command()

@@ -54,14 +54,13 @@ def check_nodes(output_format="table"):
                         "detail": cond.message or "Node is not ready",
                         "severity": "error",
                     })
-                elif cond.type in ("MemoryPressure", "DiskPressure", "PIDPressure"):
-                    if cond.status == "True":
-                        issues.append({
-                            "node": node_name,
-                            "check": cond.type,
-                            "detail": cond.message or f"{cond.type} detected",
-                            "severity": "error",
-                        })
+                elif cond.type in ("MemoryPressure", "DiskPressure", "PIDPressure") and cond.status == "True":
+                    issues.append({
+                        "node": node_name,
+                        "check": cond.type,
+                        "detail": cond.message or f"{cond.type} detected",
+                        "severity": "error",
+                    })
 
         # Check resource usage
         allocatable = node.status.allocatable or {}

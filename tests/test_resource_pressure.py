@@ -2,7 +2,7 @@
 
 from unittest.mock import MagicMock, patch
 
-from kube_doctor.checks.resource_pressure import check_nodes, _parse_resource
+from kube_doctor.checks.resource_pressure import _parse_resource, check_nodes
 
 
 def test_parse_cpu_millicores():

@@ -61,20 +61,23 @@ def check_pods(namespace=None, output_format="table"):
         if pod.status.container_statuses:
             for cs in pod.status.container_statuses:
                 # CrashLoopBackOff
-                if cs.state and cs.state.waiting:
-                    if cs.state.waiting.reason in (
+                if (
+                    cs.state
+                    and cs.state.waiting
+                    and cs.state.waiting.reason in (
                         "CrashLoopBackOff",
                         "ImagePullBackOff",
                         "ErrImagePull",
                         "CreateContainerConfigError",
-                    ):
-                        issues.append({
-                            "pod": pod_name,
-                            "namespace": pod_ns,
-                            "status": cs.state.waiting.reason,
-                            "reason": cs.state.waiting.message or "N/A",
-                            "severity": "error",
-                        })
+                    )
+                ):
+                    issues.append({
+                        "pod": pod_name,
+                        "namespace": pod_ns,
+                        "status": cs.state.waiting.reason,
+                        "reason": cs.state.waiting.message or "N/A",
+                        "severity": "error",
+                    })
 
                 # High restart count
                 if cs.restart_count and cs.restart_count >= RESTART_THRESHOLD:
